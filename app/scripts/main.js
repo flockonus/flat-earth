@@ -86,11 +86,19 @@ function earthChart() {
         .attr('r', 0)
         .attr('cx', function(d) { return projection(d.coordinates)[0]; })
         .attr('cy', function(d) { return projection(d.coordinates)[1]; })
-        .attr('fill', '#00A0B0')
+        .attr('fill', '#00A0B0');
 
       circles.transition()
         .delay(function(d, k) { return me.step * k; })
-        .duration(0.5e3)
+        .each('end', function(d, k) {
+          if ((k % 20 === 0) && !(k % 60 === 0)) {
+            EarthFx.smallMeteorFx();
+          }
+
+          if (k % 60 === 0) {
+            EarthFx.bigMeteorFx();
+          }
+        })
         .attr('r', function(d) { return rScale(d.mass); })
         .transition().duration(500)
         .attr('fill', '#00A0B0');
