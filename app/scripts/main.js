@@ -47,7 +47,7 @@ function earthChart() {
 
       var rScale = d3.scale.sqrt()
         .domain(d3.extent(data.meteorites, function(d) { return d.mass; }))
-        .range([4, 20]);
+        .range([2, 20]);
 
       var cScale = d3.scale.linear()
         .domain(rScale.domain())
