@@ -27,7 +27,7 @@ function earthChart() {
     width:  800,
     height: 400,
     maxDate: new Date(),
-    step: 10
+    step: 1
   };
 
   function chart(selection) {
