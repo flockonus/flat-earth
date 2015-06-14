@@ -7,8 +7,8 @@
 
 /* Space out content a bit */
 body {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -21,15 +21,15 @@ body {
 
 /* Custom page header */
 .header {
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid #00A0B0;
 }
 
 /* Make the masthead heading the same height as the navigation */
 .header h3 {
   margin-top: 0;
   margin-bottom: 0;
-  line-height: 40px;
-  padding-bottom: 19px;
+  line-height: 30px;
+  padding-bottom: 10px;
 }
 
 /* Custom page footer */
@@ -75,11 +75,17 @@ body {
   .footer {
     padding-left: 0;
     padding-right: 0;
+    color: #00A0B0;
   }
 
   /* Space out the masthead */
   .header {
-    margin-bottom: 30px;
+    font-family: 'Orbitron', sans-serif;
+    color: #00A0B0;
+  }
+
+  .text-muted {
+    color: #00A0B0;
   }
 
   /* Remove the bottom border on the jumbotron for visual effect */
@@ -96,5 +102,5 @@ body {
 }
 
 .landing {
-  fill-opacity: 0.5;
+  fill-opacity: 0.9;
 }

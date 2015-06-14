@@ -26,7 +26,8 @@ function earthChart() {
   var me = {
     width:  800,
     height: 400,
-    maxDate: new Date()
+    maxDate: new Date(),
+    step: 10
   };
 
   function chart(selection) {
@@ -36,7 +37,7 @@ function earthChart() {
           svg = div.selectAll('svg').data([data]);
 
       svg.enter().append('svg');
-      svg.attr('width', width).attr('height', height);
+      svg.attr('width', me.width).attr('height', me.height);
       svg.exit().remove();
 
       // Compute the projection
@@ -85,14 +86,14 @@ function earthChart() {
         .attr('r', 0)
         .attr('cx', function(d) { return projection(d.coordinates)[0]; })
         .attr('cy', function(d) { return projection(d.coordinates)[1]; })
-        .attr('fill', '#EDC951')
+        .attr('fill', '#00A0B0')
 
       circles.transition()
-        .delay(function(d, k) { return k; })
+        .delay(function(d, k) { return me.step * k; })
         .duration(0.5e3)
         .attr('r', function(d) { return rScale(d.mass); })
         .transition().duration(500)
-        .attr('fill', '#CC333F');
+        .attr('fill', '#00A0B0');
 
       circles.exit().remove();
 
@@ -116,6 +117,15 @@ var mapChart = earthChart();
 
 function updateCharts() {
 
+  var container = d3.select('.chart-container');
+
+  var width = parseInt(container.style('width'), 10),
+      height = width / 2;
+
+  mapChart
+    .width(width)
+    .height(height);
+
   d3.selectAll('.chart-container')
     .data([chartData])
     .call(mapChart);
@@ -136,7 +146,7 @@ d3.json('data/countries.topojson', function(error, topodata) {
 });
 
 
-d3.csv('data/meteorite-landings.csv', function(error, mdata) {
+d3.csv('data/landings.csv', function(error, mdata) {
 
   if (error) {
     console.log(error);
@@ -147,12 +157,13 @@ d3.csv('data/meteorite-landings.csv', function(error, mdata) {
 
   mdata.forEach(function(d) {
     points.push({
-      type: 'Point',
-      coordinates: [+d.reclong, +d.reclat],
+      coordinates: [+d.lon, +d.lat],
       mass: +d.mass,
-      date: new Date(d.year)
+      date: new Date(d.date)
     });
   });
+
+  console.log('Done');
 
   // Sort by date
   points.sort(function(a, b) { return a.date < b.date ? -1 : 1; });
