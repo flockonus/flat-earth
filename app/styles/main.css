@@ -87,3 +87,14 @@ body {
     border-bottom: 0;
   }
 }
+
+
+/* Map */
+
+.country {
+  fill: #3E4147;
+}
+
+.landing {
+  fill-opacity: 0.5;
+}
